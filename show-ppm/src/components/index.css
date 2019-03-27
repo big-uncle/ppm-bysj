@@ -1,0 +1,121 @@
+/* .editable-row .ant-form-explain {
+    position: absolute;
+    font-size: 12px;
+    margin-top: 5000px;
+  } */
+  
+  .all{
+    padding-top: 100px;
+    padding-left: 10%;
+    width:85%;
+  }
+  .avatar{
+    top: 2%;
+    position: absolute ;
+    right: 3%;
+  }
+  .xlsx{
+    top: 6%;
+    position: absolute ;
+    right: 20%;
+  }
+  .ruku{
+    bottom: 36%;
+    position: absolute ;
+    right: 20%;
+  }
+  .pic {
+    width: 350px;
+    height: 380px;
+    margin: 1px 15px 15px 1px;
+  }
+  .pic .text{
+    width: 350px;
+    height: 10px;
+    text-align: center;
+    /* color: gray; */
+  }
+   .pic img{
+    /* bottom: 50%; */
+    /* position: absolute ; */
+    /* background: url("../../public/timg (1).jpg") no-repeat ; */
+    /* background: url("F:/pic/timg (1).jpg") no-repeat ; */
+     width: 350px;
+    height: 350px;
+    margin: 15px 15px;
+  }  
+
+  .huowu{
+    width: 280px;
+    height: 280px;
+    top: 88px;
+    left: 400px;
+    position: absolute;
+  }
+  .huowu .id{
+  margin: 20% 10% 10% 20%;
+  position: relative;
+  }
+.huowu .name{
+   margin: 20% 10% 10% 20%;
+   position: relative;
+  }
+.huowu .type{
+    margin: 20% 10% 10% 20%;
+    position: relative;
+ }
+ .user{
+    width: 299px;
+    height: 280px;
+    top: 80px;
+    right: 55px;
+    position: absolute;
+}
+.user .name{
+    margin: 20% 10% 10% 20%;
+    position: relative;
+    }
+  .user .date{
+     margin: 20% 10% 10% 20%;
+     position: relative;
+    }
+  .user .type{
+      margin: 20% 10% 10% 20%;
+      position: relative;
+   }
+
+    .desc{
+      width: 490px;
+      height: 100px;
+      bottom: 80px;
+      right: 55px;
+      position: absolute;
+      /* text-align: center; */
+    }
+    .desc .text{
+      width: 350px;
+      height: 100px;
+      /* bottom: 80px;
+      left: 500px; */
+      /* text-align: center; */
+      margin: 2% 15%
+    }
+    .date {
+      position: absolute;
+      /* margin: 60px  */
+      top: 5%;
+      left:10%;
+       /* bottom: 80px; */
+    }
+    .input{
+      position: absolute;
+      /* margin: 60px  */
+      top: 5%;
+      left:40%;
+    }
+    .select{
+      position: absolute;
+      /* margin: 60px  */
+      top: 5%;
+      left:30%;
+    }

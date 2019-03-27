@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./ppm-bysj/ppm-store/template/js/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <div id="id"></div>
+
+
+</body>
+<script>
+
+    window.onload = function () {
+        var str = ""
+        var id = ""
+        window.onkeypress = function (e) {
+            // console.log(e.key)
+            if (e.key >= 0 && e.key <= 9) {
+                //   alert(e.key)//弹出按键对应的字母
+                //   alert(e.keyCode)
+                // console.log(e)
+                str += e.key
+                if (str.length == 10) {
+                    console.log("已输入10个,输入的计入下一个十位", str)
+                    $.post("http://127.0.0.1:10800/api/data/addRecords",{ userId: "7758521", itemsId: str ,userName:"罗盼"}, function(result){
+
+                if (typeof result == 'string') {
+                    result = JSON.parse(result)
+                    console.log(result.msg)
+                }
+            });
+                    var x = document.getElementById("id")
+                    x.innerHTML += str+"\n"
+                    str = ""
+                    clearTimeout(id)
+                }
+                // console.log(str)
+                if (str.length == 1) {
+                    id = setTimeout(function () {
+                        if (str.length < 10) {
+                            str = ""
+                            // clearTimeout(id)
+                        }
+                        // if (str.length >= 10) {
+                        //     console.log("已输入10个，请再输入下一个10位", str)
+                        //     str = ""
+                        //     // clearTimeout(id)
+                        // }
+                    }, 300);
+                }
+            }
+        }
+    }
+
+</script>
+
+</html>

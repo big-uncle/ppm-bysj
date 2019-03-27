@@ -1,0 +1,190 @@
+html,head,body,header,section,footer{
+    padding:0px;
+    margin: 0px;
+}
+header{
+    position: relative;
+    height:25px;
+    background-color:rgb(37, 37, 37);
+}
+
+header .logo{
+    width: 215px;
+    height: 30px;
+
+}
+header .logo .logtext1{
+    width: 120px;
+    height: 30px;
+    margin: 5px 50px;
+    color: #0099ff;
+    top: 30px;
+    font-size: 20px;
+}
+header .logtext{
+    position: absolute;
+    font-size: 20px;
+    top:0px;
+    left:calc(50% - 250px);
+    width: 400px;
+    text-align: center;
+    /* color: rgb(128, 128, 128); */
+    color: #AAABAF;
+    /* color:   #ffffff; */
+}
+
+
+header .www{
+    position: absolute;
+    font-size: 14px;
+    top:3px;
+    right: 10px;
+    width: 100px;
+    line-height: 20px;
+    text-align: center;
+    /* color: gray; */
+    color: #AAABAF;
+    cursor: pointer;
+}
+
+/* section{
+    position: relative;
+    background-image: url(/imgs/login_bg.jpg);
+       background-repeat: round;
+    background-size:100%;
+    width: 100%;
+    height: 650px;
+}  */
+/* #errorImg{
+	width: 58px;
+	height: 58px;
+	margin: 0px auto;
+    background: url("../imgs/errorIcon.png") no-repeat ;
+    background-size: contain;
+	border:none;
+} */
+body{
+    position: absolute;
+    background: url("../imgs/login_bg.jpg") no-repeat;
+    background-size:100%;
+    width: 100%;
+    height: 750px;
+} 
+section .login{
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    /* 绝对定位 */
+    position: absolute;
+    top: 130px;
+    right: 10%;
+}
+
+section .login .tip{
+    width: 100%;
+    height: 50px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 28px;
+    color: #333333;
+}
+
+
+section .login .error{
+    
+    margin: 0px 80px 15px;
+    border: 1px solid #F15532;
+    background: #FEEEEB;
+    color: #F15533;
+    font-size: 14px;
+    padding: 3px 5px 5px 35px;
+    display: none;
+}
+
+
+section .login .content{
+    margin: 16px 43px;
+}
+
+
+
+section .login .content input{
+    width: 180px;
+    height: 30px;
+    border: 1px solid #dddddd;
+    padding: 5px 20px;
+    
+}
+
+.center{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+section .login .content button{
+    width: 223px;
+    height: 42px;
+    line-height: 30px;
+    color: #ffffff;
+    font-size: 15px;
+    background-color: #0099ff;
+    border: 1px solid #0099ff;
+    cursor: pointer;
+}
+section .login .xiamian{
+    margin:0px 0px;
+    color: #0099ff;
+    font-size: 13px;
+    text-align: right;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+}
+section .login .xiamian .regist{
+    margin: 1px 5px ;
+    color: #0099ff;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    flex:3;
+}
+
+
+section .login .xiamian .forget{
+    margin: 1px 35px ;
+    color: #0099ff;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    flex:2;
+}
+
+footer .tip{
+    width: 350px;
+    height: 70px;
+    line-height: 20px;
+    color: #ffffff;
+    position: absolute;
+    left:calc(50% - 175px);
+    top:calc(90% - 35px);
+}
+
+footer .tip .statement{
+    font-size: 12px;
+    text-align: center;
+    line-height: 50px;
+}
+
+footer .tip .contact{
+    font-size: 14px;
+    display: flex;
+}
+footer .tip .contact div{
+    flex: 1;
+    min-width: 60px;
+    text-align: center;
+    cursor: pointer;
+}

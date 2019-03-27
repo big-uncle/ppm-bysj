@@ -1,0 +1,353 @@
+html,head,body,header,section,footer{
+    padding:0px;
+    margin: 0px;
+}
+header{
+    position: relative;
+    height:30px;
+    background-color:rgb(37, 37, 37);
+}
+
+header .logo{
+    width: 215px;
+    height: 30px;
+
+}
+header .logo .logtext1{
+    width: 120px;
+    height: 30px;
+    margin: 5px 50px;
+    color: #0099ff;
+    top: 30px;
+    font-size: 20px;
+}
+header .logtext{
+    position: absolute;
+    font-size: 20px;
+    top:0px;
+    /* right: 20%; */
+    left:calc(50% - 250px);
+    width: 400px;
+    /* line-height: 3px; */
+    text-align: center;
+    color: rgb(128, 128, 128);
+}
+
+
+header .www{
+    position: absolute;
+    font-size: 14px;
+    top:6px;
+    right: 10px;
+    width: 100px;
+    line-height: 20px;
+    text-align: center;
+    color: gray;
+    cursor: pointer;
+}
+
+/* header .logo img{
+    width: 163px;
+    height: 41px;
+    margin: 18px 25px;
+} */
+
+
+
+
+footer {
+    background: #ffffff;
+}
+
+footer .tip{
+    width: 500px;
+    height: 70px;
+    line-height: 35px;
+    color: #999999;
+    margin: 15px auto;
+    
+}
+
+footer .tip .statement{
+    font-size: 12px;
+    text-align: center;
+}
+
+footer .tip .contact{
+    font-size: 14px;
+    display: flex;
+}
+footer .tip .contact div{
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.body {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 36px 0 55px;
+}
+
+.container_box {
+    border: 1px solid #d9dadc;
+    background-color: #fff;
+}
+.container_box {
+    min-height: 700px;
+}
+
+.container_hd, .main_hd {
+    line-height: 40px;
+}
+
+.page_news .container_hd h2, .page_simple .container_hd h2, .page_news .main_hd h2, .page_simple .main_hd h2 {
+    line-height: 52px;
+    background-color: #f4f5f9;
+}
+.container_hd h2, .main_hd h2 {
+    font-size: 16px;
+    padding: 0 30px;
+    line-height: 75px;
+}
+.container_hd h2, .main_hd h2 {
+    font-weight: 400;
+    font-style: normal;
+}
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, fieldset, textarea {
+    margin: 0;
+}
+
+.main_bd {
+    padding: 75px 150px;
+}
+.container_bd, .main_bd {
+    padding-bottom: 30px;
+}
+
+.pwd_form .form {
+    padding-left: 120px;
+}
+.form_desc {
+    padding-bottom: 40px;
+}
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, fieldset, textarea {
+    margin: 0;
+}
+.tool_bar.border {
+    border-top: 1px solid #e7e7eb;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.tool_bar.with_form {
+    margin-top: 15px;
+}
+.tc {
+    text-align: center;
+}
+.tool_bar {
+    padding-bottom: 50px;
+    padding-top: 20px;
+}
+.tool_bar {
+    margin-top: 40px;
+    padding-top: 20px;
+}
+.frm_control_group {
+    padding-bottom: 25px;
+}
+
+.icon_msg_mini.info {
+    background: url(/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z381ecd.png) 0 -876px no-repeat;
+}
+.mini_tips i {
+    font-weight: 400;
+    font-style: normal;
+    margin-top: -3px;
+    margin-right: 3px;
+}
+.icon_msg_mini {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    display: inline-block;
+}
+.pwd_form .frm_label {
+    width: 4em;
+}
+.frm_label {
+    float: left;
+    width: 5em;
+    margin-top: .3em;
+    margin-right: 1em;
+    font-size: 14px;
+}
+.frm_controls {
+    display: table-cell;
+    vertical-align: top;
+    float: none;
+    width: auto;
+}
+body {
+    line-height: 1.6;
+    font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+    color: #222;
+    font-size: 14px;
+}
+.frm_input_box {
+    display: inline-block;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    width: 278px;
+    font-size: 14px;
+    padding: 0 10px;
+    border: 1px solid #e7e7eb;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    background-color: #fff;
+}
+.pwd_form .frm_tips, .pwd_form .frm_msg {
+    width: auto;
+}
+.frm_tips, .frm_msg {
+    padding-top: 4px;
+    width: 300px;
+}
+.frm_tips {
+    color: #8d8d8d;
+}
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, fieldset, textarea {
+    margin: 0;
+}
+
+
+.frm_input {
+    height: 22px;
+    margin: 4px 0;
+}
+.frm_input, .frm_textarea {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+}
+
+textarea, input {
+    color: #222;
+}
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
+}
+fieldset, legend, textarea, input {
+    padding: 0;
+}
+input, textarea, button, a {
+    outline: 0;
+}
+
+
+.icon_msg_mini.info {
+    background: url(/imgs/base_z381ecd.png) 0 -876px no-repeat;
+}
+.mini_tips i {
+    font-weight: 400;
+    font-style: normal;
+    margin-top: -3px;
+    margin-right: 3px;
+}
+.icon_msg_mini {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+
+.tool_bar.tc .btn {
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
+.tool_bar .btn {
+    margin-right: 1em;
+}
+.btn {
+    min-width: 60px;
+}
+.btn_primary {
+    background-color: #459ae9;
+    background-image: -moz-linear-gradient(top,#459ae9 0,#459ae9 100%);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#459ae9),to(#459ae9));
+    background-image: -webkit-linear-gradient(top,#459ae9 0,#459ae9 100%);
+    background-image: -o-linear-gradient(top,#459ae9 0,#459ae9 100%);
+    background-image: linear-gradient(to bottom,#459ae9 0,#459ae9 100%);
+    border-color: #459ae9;
+    color: #fff;
+}
+.btn {
+    display: inline-block;
+    overflow: visible;
+    padding: 0 22px;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 14px;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+}
+a {
+    color: #459ae9;
+    text-decoration: none;
+}
+input, textarea, button, a {
+    outline: 0;
+}
+
+body{
+    min-width: 1200px;
+    background: #e7e8eb;
+}
+.frm_msg.fail {
+    color: #e15f63;
+}
+.frm_msg {
+    display: none;
+    overflow: hidden;
+}
+.frm_tips, .frm_msg {
+    padding-top: 4px;
+    width: 300px;
+}
+#successImg{
+	width: 58px;
+	height: 58px;
+	margin: 0px auto;
+    background: url("../imgs/successIcon.png") no-repeat ;
+    background-size: contain;
+	border:none;
+}
+#errorImg{
+	width: 58px;
+	height: 58px;
+	margin: 0px auto;
+    background: url("../imgs/errorIcon.png") no-repeat ;
+    background-size: contain;
+	border:none;
+}
