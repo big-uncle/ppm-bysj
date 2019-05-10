@@ -1,6 +1,5 @@
 import { message } from 'antd';
-import  apiurl from "./apiUrl";
-import  showurl from "./showUrl";
+import  * as conf from "./conf";
 function getRFID(){
     var userId= localStorage.getItem('userId')
     var userName= localStorage.getItem('userName')
@@ -11,18 +10,18 @@ function getRFID(){
         if (e.key >= 0 && e.key <= 9) {
             str += e.key
             if (str.length == 10) {
-        var url = apiurl+'/api/data/addRecords?userId='+userId+'&itemsId='+str+'&userName='+userName
-        console.log(url)
+        var url = conf.apiurl()+'/api/data/addRecords?userId='+userId+'&itemsId='+str+'&userName='+userName
         fetch(url).then(res => {
             res.json().then( obj=>{
                 if (obj.code==='400'){
                 message.error(obj.msg)
                 }else if (obj.code==='200'){
                     message.success(obj.msg)
+                    setTimeout(function () {
+                        window.location.reload()//刷新地址栏
+                    }, 888);
                 }
-                setTimeout(function () {
-                window.location.href =showurl;
-            }, 888);
+               
             })
     })
                 str = ""

@@ -1,11 +1,7 @@
 var redirect_uri;
 $(function () {
     //地址栏参数，回调地址
-    //  redirect_uri = decodeURIComponent(GetQueryString("redirect_uri"));
     redirect_uri = decodeURIComponent("http://127.0.0.1:10888");
-    // redirect_uri ="http://ppmshow.mryl-frp.leconginfo.com";
-    // redirect_uri = decodeURIComponent("http://www.baidu.com");
-   
     document.onkeydown = function (e) {
         var ev = document.all ? window.event : e;
         if (ev.keyCode == 13) {
@@ -47,7 +43,7 @@ $(function () {
                     $(".error").hide();
                     $(".login").hide();
                     var dataArr = result.data;
-                    var params = 'userId=' + dataArr.user_id + '&userName=' + dataArr.user_name + '&account=' + dataArr.user_account + '&phone=' + dataArr.user_phone + '&loginStatus=success' ;
+                    var params = 'userId=' + dataArr.user_id + '&userName=' + dataArr.user_name + '&account=' + dataArr.user_account + '&phone=' + dataArr.user_phone + '&loginStatus=success'+ '&date=' + dataArr.add_date ;
                     // localStorage.setItem("userId", dataArr.user_id);//给localStorage里面存放信息
                     //    localStorage.mycolor= '456';
                     //     //获取：

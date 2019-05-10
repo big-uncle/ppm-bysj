@@ -1,9 +1,10 @@
 package login
 
 import (
-	"../../models/login"
 	"encoding/json"
 	"log"
+
+	"../../models/login"
 )
 
 /**
@@ -72,7 +73,7 @@ func ApiChangepwd(account string, phone string, newpwd string) []byte {
 	} else {
 		newRes = map[string]interface{}{"data": count, "msg": "修改失败", "success": false}
 	}
-	log.Println("影响的行数为", count)
+	// log.Println("影响的行数为", count)
 	result, err := json.Marshal(newRes)
 	if err == nil {
 		return result
@@ -82,7 +83,7 @@ func ApiChangepwd(account string, phone string, newpwd string) []byte {
 }
 
 //注册
-func ApiRegist(phone, newpwd, account, name string) []byte {
+func ApiRegist(phone, newpwd, account, name, sex string) []byte {
 	userInfo := login.CheckUserAccount(account)
 	log.Println(userInfo)
 	if len(userInfo) > 0 {
@@ -104,7 +105,7 @@ func ApiRegist(phone, newpwd, account, name string) []byte {
 			return []byte{}
 		}
 	}
-	count, err := login.ApiRegist(phone, newpwd, account, name)
+	count, err := login.ApiRegist(phone, newpwd, account, name, sex)
 	newRes := map[string]interface{}{}
 	if err == nil {
 		newRes = map[string]interface{}{"data": count, "msg": "注册成功", "success": true}

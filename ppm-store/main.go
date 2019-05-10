@@ -1,19 +1,20 @@
 package main
 
 import (
-	"./com/controllers/index"
-	"./com/controllers/login"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"path"
+
+	"./com/controllers/index"
+	"./com/controllers/login"
+	"github.com/gorilla/mux"
 )
 
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	// router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-	// 	w.Write([]byte("错误的访问!"))
+	// 	w.Write([]byte("无效的地址,错误的访问!"))
 	// })
 	/**
 	 * 处理静态资源文件
@@ -21,7 +22,7 @@ func main() {
 	router.Handle("/css/{.+}", FileHandler{}).Methods("GET")
 	router.Handle("/imgs/{.+}", FileHandler{}).Methods("GET")
 	router.Handle("/js/{.+}", FileHandler{}).Methods("GET")
-  //----------------------------------登录页面---------------------------------
+	//----------------------------------登录页面---------------------------------
 	//跳转登录界面
 	router.HandleFunc("/", login.Login)
 	router.HandleFunc("/login", login.Login)
@@ -49,11 +50,35 @@ func main() {
 	//导出excel表格
 	router.HandleFunc("/api/data/findAllCountXlsx", index.FindAllCountXlsx)
 	//查询所有货物仓库剩余量的统计
-	router.HandleFunc("/api/data/findInventory", index.FindInventory) 
+	router.HandleFunc("/api/data/findInventory", index.FindInventory)
+	//查询个人每日统计和总体统计，总仓库的每日统计和总体统计
+	router.HandleFunc("/api/data/statistical", index.Statistical)
+	//查询个人总体统计,每日的详细数据统计量
+	router.HandleFunc("/api/data/statisticalself", index.StatisticalSelf)
+	//查询所有员工详细统计信息
+	router.HandleFunc("/api/data/permsInfo", index.PermsInfo)
+	//查询所有员工信息
+	router.HandleFunc("/api/data/userUpd", index.UserUpd)
+	//修改员工信息
+	router.HandleFunc("/api/data/userlist", index.Userlist)
+	//删除员工信息
+	router.HandleFunc("/api/data/deluser", index.Deluser)
+	//增加货物信息
+	router.HandleFunc("/api/data/addItemInfo", index.AddItemInfo)
+	//增加货物图片
+	router.HandleFunc("/api/data/addItemPic", index.AddItemPic)
+	//修改货物信息
+	router.HandleFunc("/api/data/updItemInfo", index.UpdItemInfo)
+	//删除货物信息
+	router.HandleFunc("/api/data/delItemInfo", index.DelItemInfo)
+	//查询货物信息
+	router.HandleFunc("/api/data/findItemInfo", index.FindItemInfo)
+	//查询所有货物信息
+	router.HandleFunc("/api/data/findAllItemInfo", index.FindAllItemInfo)
+
 	// router.HandleFunc("/api/xlsx/",)
 	log.Println("服务器已启动，端口号10800")
 	log.Fatal(http.ListenAndServe(":10800", &MyServer{router}))
-
 
 }
 

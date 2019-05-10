@@ -74,11 +74,11 @@ section .login{
     width: 300px;
     height: 300px;
     background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
+    border-radius: 10px;
     /* 绝对定位 */
     position: absolute;
     top: 130px;
-    right: 10%;
+    right: 15%;
 }
 
 section .login .tip{
@@ -169,7 +169,7 @@ footer .tip{
     color: #ffffff;
     position: absolute;
     left:calc(50% - 175px);
-    top:calc(90% - 35px);
+    top:calc(110% - 0px);
 }
 
 footer .tip .statement{

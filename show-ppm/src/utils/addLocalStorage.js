@@ -1,21 +1,24 @@
 import  loginCheck from "./loginCheck";
+import * as conf from "./conf";
 function login() {
-  if(localStorage.getItem('loginStatus')==="success"){
-    return
-  }
-    var userId = GetParameter("userId");
-    var userName = GetParameter("userName");
-    var account = GetParameter("account");
-    var phone = GetParameter("phone");
-    var loginStatus = GetParameter("loginStatus");
-    if (userId!==""&&loginStatus!==""&&userName!==""){
-    localStorage.setItem("userId", userId);
-    localStorage.setItem("userName", userName);
-    localStorage.setItem("account", account);
-    localStorage.setItem("phone", phone);
-    localStorage.setItem("loginStatus", loginStatus);
+  var userId = GetParameter("userId");
+  var userName = GetParameter("userName");
+  var account = GetParameter("account");
+  var phone = GetParameter("phone");
+  var date = GetParameter("date");
+  var loginStatus = GetParameter("loginStatus");
+  if (userId!==""&&loginStatus!==""&&userName!==""){
+    localStorage.clear()
+  localStorage.setItem("userId", userId);
+  localStorage.setItem("userName", userName);
+  localStorage.setItem("account", account);
+  localStorage.setItem("phone", phone);
+  localStorage.setItem("loginStatus", loginStatus);
+  localStorage.setItem("date", date);
+  window.location.href=conf.showurl()+'#/home'
+    }else{
+      loginCheck();
     }
-    loginCheck();
  }
 export default login;
 

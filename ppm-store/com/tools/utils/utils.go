@@ -7,17 +7,30 @@ import (
 	"crypto/tls"
 	"encoding/hex"
 	"encoding/json"
-	"github.com/mozillazg/go-pinyin"
-	"github.com/snluu/uuid"
 	"io"
 	"io/ioutil"
 	"log"
 	"math/rand"
+	"mime/multipart"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/mozillazg/go-pinyin"
+	"github.com/snluu/uuid"
 )
+
+/**
+*  获取有文件上传的表单的参数
+ */
+func GetMultiParam(r *http.Request, paramName string) (multipart.File, error) {
+	file, _, err := r.FormFile(paramName)
+	if err != nil {
+		return nil, err
+	}
+	return file, err
+}
 
 // 打印日志
 func Println(file string, line int, text string) {
@@ -177,19 +190,6 @@ func GetClinicVTable(clinicList []string) string {
 			vTable += "SELECT '" + v + "' clinicId FROM DUAL "
 		} else {
 			vTable += " UNION SELECT '" + v + "' clinicId FROM DUAL "
-		}
-	}
-	return vTable
-}
-
-//根据日期数组和医生姓名拼接mysql虚拟时间表
-func GetVTableByDname(dateList []interface{}, doctorName string) string {
-	var vTable string
-	for k, v := range dateList {
-		if k == 0 {
-			vTable += "SELECT '" + v.(string) + "' stsDate, '" + doctorName + "' doctorName FROM DUAL "
-		} else {
-			vTable += " UNION SELECT '" + v.(string) + "' stsDate, '" + doctorName + "' doctorName FROM DUAL "
 		}
 	}
 	return vTable
@@ -367,6 +367,45 @@ func IsWeeks(workDate string, weeks []interface{}) bool {
 		}
 	}
 	return flag
+}
+
+//获取上周的日期-时间戳
+func Lastweek() int64 {
+	var n int64
+	a := GenerateGSTTime()
+	s := a.Weekday().String()
+	switch s {
+	case "Monday":
+		n = 0
+	case "Tuesday":
+		n = 1
+	case "Wednesday":
+		n = 2
+	case "Thursday":
+		n = 3
+	case "Friday":
+		n = 4
+	case "Saturday":
+		n = 5
+	case "Sunday":
+		n = 6
+	}
+	b := a.Unix() - n*24*60*60 //获取礼拜一的时间戳
+	// return GetWeekFrontDateArr(b, 7) //获取前七天的日期
+	return b
+}
+
+//获取一周的日期
+func GetWeekFrontDateArr(timestamp int64, i int64) (results []interface{}) {
+	//获取时间戳
+	var _results []interface{}
+	for ; i > 0; i-- {
+		//格式化为字符串,tm为Time类型
+		tm := time.Unix(timestamp-(i+1)*24*60*60, 0)
+		_results = append(_results, tm.Format("2006-01-02"))
+	}
+
+	return _results
 }
 
 /*

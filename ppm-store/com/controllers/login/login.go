@@ -1,11 +1,12 @@
 package login
 
 import (
-	"../../service/login"
-	"../../tools/utils"
 	"html/template"
 	"log"
 	"net/http"
+
+	"../../service/login"
+	"../../tools/utils"
 )
 
 //玩游戏
@@ -92,8 +93,9 @@ func ApiRegist(w http.ResponseWriter, r *http.Request) {
 	name := utils.GetParam(r, "name")
 	phone := utils.GetParam(r, "phone")
 	newpwd := utils.GetParam(r, "newpwd")
+	sex := utils.GetParam(r, "sex")
 	log.Println(name)
-	result := login.ApiRegist(phone, newpwd, account, name)
+	result := login.ApiRegist(phone, newpwd, account, name, sex)
 	w.Write(result)
 }
 

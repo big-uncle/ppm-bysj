@@ -30,7 +30,7 @@
                 str += e.key
                 if (str.length == 10) {
                     console.log("已输入10个,输入的计入下一个十位", str)
-                    $.post("http://127.0.0.1:10800/api/data/addRecords",{ userId: "7758521", itemsId: str ,userName:"罗盼"}, function(result){
+                    $.post("http://127.0.0.1:10800/api/data/addRecords",{ userId: "7758521", itemsId: str ,userName:"**"}, function(result){
 
                 if (typeof result == 'string') {
                     result = JSON.parse(result)

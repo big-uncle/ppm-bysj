@@ -5,17 +5,22 @@
   } */
   
   .all{
-    padding-top: 100px;
-    padding-left: 10%;
-    width:85%;
+    /* padding-top: 100px; */
+    position: absolute ;
+    /* padding-top: 8%; */
+    /* padding-left: 15%; */
+    top: 17%;
+    left: 15%;
+    width:75%;
+    height: 75%;
   }
   .avatar{
-    top: 2%;
+    top: 1%;
     position: absolute ;
-    right: 3%;
+    right: 6%;
   }
   .xlsx{
-    top: 6%;
+    top: 12%;
     position: absolute ;
     right: 20%;
   }
@@ -76,7 +81,7 @@
     position: relative;
     }
   .user .date{
-     margin: 20% 10% 10% 20%;
+     margin: 10% 10% ;
      position: relative;
     }
   .user .type{
@@ -103,19 +108,291 @@
     .date {
       position: absolute;
       /* margin: 60px  */
-      top: 5%;
+      top: 10%;
       left:10%;
+       /* bottom: 80px; */
+    }
+    .dateselect {
+      position: absolute;
+      /* margin: 60px  */
+      top: 12%;
+      left:15%;
        /* bottom: 80px; */
     }
     .input{
       position: absolute;
       /* margin: 60px  */
-      top: 5%;
-      left:40%;
+      top: 12%;
+      left:45%;
     }
     .select{
       position: absolute;
       /* margin: 60px  */
-      top: 5%;
-      left:30%;
+      top: 12%;
+      left:35%;
     }
+
+  /* .bigall{
+  background-image: url("../../public/back.png");
+  background-color: #2e323f;
+  min-height: 100vh;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+} */
+.topmenu{
+  /* top: 8%; */
+ /* width: 100%; */
+  height: 8%;
+   left: 13%;
+  width: 87%; 
+  position: absolute;
+  /* font-size: 25px; */
+  /* text-align: center; */
+  /* color: rgb(223, 168, 18); */
+  /* color: #0099ff; */
+  /* font-weight: bold; */
+  background-color:#333;
+  box-shadow: 2px 0 8px rgba(116, 165, 221, 0.8);
+}
+.topmenu .home{
+  font-size: 18px;
+   margin: 23px 6% 8% 75%
+}
+.menuAll{
+  position: absolute;
+  width: 13%;
+  top: 8%;
+  height: 92%;
+  background-color:white;
+   border-radius: 6px;
+    /* box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35); */
+    box-shadow: 2px 0 6px rgba(176, 227, 243, 0.8);
+}
+.log{
+  position: absolute;
+  width: 13%;
+  height: 8%;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  /* color:  #0099ff; */
+  color: rgb(223, 168, 18);
+  background-color:#333;
+  line-height: 80px;
+}
+  .menu{
+    height: 10%;
+  }
+  .menu img{
+    width: 50px;
+    height: 50px;
+    margin: 15px 0px 15px 30px;
+  }
+  .menu span{
+    position: absolute;
+    font-size: 20px;
+    top: 3%;
+    left: 38%;
+    font-weight: bold;
+  }
+.homeall{
+  /* position: absolute; */
+  background-color: rgba(0,0,0,.05);
+  top: 5%;
+  height: 100%;
+  width : 100%;
+  left: 13%;
+}
+.homePageHeader{
+  width: 83%;
+  position: absolute;
+  background-color:#fff;
+  height: 18%;
+  left: 15%;
+  top: 15%;
+  border-radius: 6px;
+  /* box-shadow: 2px 0 6px rgba(176, 243, 243, 0.8); */
+  box-shadow: 2px 0 6px rgba(32, 32, 32, 0.3);
+
+}
+
+.homePageHeader .headlog{
+  position: relative;
+  top: 38%;
+  left: 2%;
+
+
+}
+.homePageHeader .hellohead{
+  position: absolute;
+ top: 43%;
+left: 10%;
+ font-size: 20px;
+ /* font-family: -apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol; */
+ font-family:"微软雅黑";
+ font-weight:bold;
+}
+.bottomintroduce{
+  position: absolute;
+ /* font-family: -apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol; */
+  /* top: 100%; */
+  padding-top: 5%;
+  color:gray;
+  /* font:bold 12px/1.5em "Microsoft YaHei"; */
+  font-size: 10px;
+  font-weight:lighter;
+}
+
+
+.worknum{
+  position: absolute;
+  font-weight:lighter;
+  top: 40%;
+  color:gray;
+  font-size: 20px;
+  left: 80%;
+  height: 50%;
+   width: 18%;
+  /* background-color: blue; */
+  /* font-weight:lighter; */
+}
+.worknum1{
+  flex: 1;
+  min-height: 50%;
+  /* background-color: black; */
+  /* font-weight:lighter; */
+}
+
+.worknum2{
+  flex: 1;
+  min-height: 50%;
+   /* background-color: red; */
+   /* font-weight:lighter; */
+}
+.card1{
+  position: absolute;
+  left: 15%;
+  width: 25%;
+  top: 39%;
+}
+.card2{
+  position: absolute;
+  left: 45%;
+  width: 50%;
+  top: 39%;
+  background-color: gray;
+}
+.card3{
+  left: 13.6%;
+  width: 86.2%;
+  top: 11%; 
+  position: absolute;
+}
+.bottomintroduce1{
+  color:gray;
+  text-align: center;
+  font-size: 18px;
+  position: absolute;
+  left: 43%;
+  bottom: 5%; 
+}
+.adduser{
+  position: absolute;
+  left: 35%;
+  bottom: 5%; 
+  width: 30%;
+  top: 30%;
+  /* background-image: url("../../public/back.png"); */
+}
+.edituser{
+  /* left: 35%; */
+  bottom: 5%; 
+  /* width: 30%; */
+  /* top: 30%; */
+  margin-right: 20%;
+}
+.adduserhead{
+  position: absolute;
+  /* left: 35%; */
+  /* bottom: 5%;  */
+  width: 87%;
+  height: 18%;
+  top: 8%;
+  left:13%;
+  background-image: url("../../public/back.png");
+  background-repeat: no-repeat;
+}
+
+.userlist{
+     /* padding-top: 100px; */
+     position: absolute ;
+     /* padding-top: 8%; */
+     /* padding-left: 15%; */
+     top: 13%;
+     left: 15%;
+     width:82%;
+     height: 75%;
+}
+.upload{
+     /* padding-top: 100px; */
+     /* position: absolute ; */
+     /* padding-top: 8%; */
+     /* padding-left: 15%; */
+     top: 10%;
+     left: 20%;
+     /* right: 10%; */
+     width:30%;
+}
+.addItem{
+  position: absolute;
+  left: 35%;
+  bottom: 5%; 
+  width: 30%;
+  top: 15%;
+  /* background-image: url("../../public/back.png"); */
+}
+.itemlist{
+   /* padding-top: 100px; */
+   position: absolute ;
+   /* padding-top: 8%; */
+   /* padding-left: 15%; */
+   top: 13%;
+   left: 15%;
+   width:82%;
+   height: 75%;
+}
+.edititem{
+    padding-left: 45%;
+    bottom: 5%; 
+    /* width: 30%; */
+    /* top: 30%; */
+    /* margin-right: 20%; */
+}
+/* 大的pic */
+.edititempic{ 
+  /* margin-left: 0%; */
+  left:6%;
+  top: 18%; 
+  position: absolute ;
+  padding-right: 30%;
+  width: 50%;
+  /* top: 30%; */
+  /* margin-right: 20%; */
+}
+/* //货物图片标题 */
+.itemdeitpic{
+  /* margin-left: 50%; */
+  top: -6.5%;
+  position: absolute ;
+  left:0%;
+  width: 80%;
+  z-index: 1000;
+}
+.picmiaoshu{
+  margin-left: 50%;
+  bottom: 0%;
+  position: absolute ;
+  width: 100%;
+}

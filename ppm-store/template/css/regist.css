@@ -351,3 +351,9 @@ body{
     background-size: contain;
 	border:none;
 }
+
+#js_sex{
+    margin-top: 5px;
+    width: 23px;
+    height: 23px;
+}

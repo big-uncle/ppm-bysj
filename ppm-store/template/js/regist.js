@@ -90,10 +90,13 @@ $(function () {
         var newpwd = $('#js_newpwd').val()
         var account = $('#js_account').val()
         var name = $('#js_name').val()
+        var sex= $('input:radio[name="sex"]:checked').val();
+
+
         // 页面没有错误提示
         if (oldStatus && newStatus && reStatus && accounStatus && nameStatus) {
             //提交
-            $.post("/api/regist", { phone: phone, newpwd: newpwd, account: account, name: name }, function (result) {
+            $.post("/api/regist", { phone: phone, newpwd: newpwd, account: account, name: name,sex: sex }, function (result) {
                 if (typeof result == 'string') {
                     result = JSON.parse(result)
                 }

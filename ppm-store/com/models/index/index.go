@@ -3,38 +3,71 @@ package index
 import (
 	"../../tools/mysql"
 	"../../tools/utils"
+
 	// "log"
 	"mryl.tools/mysqlPack"
-	"strconv"
+	// "strconv"
 )
 
-type Appointment struct {
-	AppointmentId   string //预约编号
-	UserId          string //用户编号
-	Id              string //用户编号
-	DoctorId        string //医生编号
-	ClinicId        string //诊所编号
-	AppointmentTime string //预约时间
-	DoctorName      string //医生姓名
-	OrderId         string //订单编号
-	PatientName     string //患者姓名
-	PatientTel      string //患者电话
-	PatientAge      string //患者年龄
-	PatientSex      string //患者性别
-	PatientCond     string //patientCond: 0 初诊;1 复诊
-	PatientCondDesc string //病情描述
-	PayType         string //支付类型
-	Price           string //预约价格
-	Status          string //status: -1 取消订单;0 等待付款;1 等待就诊;2 等待评价;3 完成订单。
-	EcologyId       string //生态编号
-	AddTime         string //预约添加时间
-	A_order         int    //排号编号
-	Doctor_order    int    //该医生的排号
-	AddRegTime      string //排号时间
-	DoctorNameReg   string //排号时分配的医生姓名
-	DoctorType      string //预约类型
-	OpenId          string // 用户编号
-	Unique_id       string //用户统一标识符
+type Item struct {
+	ItemId   string
+	ItemName string
+	ItemDesc string
+	ItemPic  string
+	ItemType string
+}
+
+func (i *Item) AddItemInfo() (int64, error) {
+	db := mysql.GetDB()
+	q := `
+	INSERT INTO bishe.items (
+		items_id,
+		items_name,
+		items_desc,
+		items_pic,
+		items_type
+	)
+	VALUES
+		(?,?,?,?,?)
+	`
+	return mysqlPack.Insert(db, q, i.ItemId, i.ItemName, i.ItemDesc, i.ItemPic, i.ItemType)
+}
+
+func (i *Item) UpdItemInfo() (int64, error) {
+	db := mysql.GetDB()
+	q := `
+	UPDATE bishe.items SET items_name= ?, items_desc = ?, items_pic = ?,items_type = ? WHERE items_id = ? 
+	`
+	return mysqlPack.Exec(db, q, i.ItemName, i.ItemDesc, i.ItemPic, i.ItemType, i.ItemId)
+}
+
+func DelItemInfo(itemId string) (int64, error) {
+	db := mysql.GetDB()
+	q := `
+	DELETE FROM bishe.items WHERE items_id = ?
+	`
+	return mysqlPack.Exec(db, q, itemId)
+}
+func FindItemInfo(itemId string) map[string]string {
+	db := mysql.GetDB()
+	q := `
+	SELECT * FROM bishe.items WHERE items_id = ?
+	`
+	return mysqlPack.SelectMap(db, q, itemId)
+}
+func FindAllItemInfo() []interface{} {
+	db := mysql.GetDB()
+	q := `
+	SELECT
+	t1.*,(case WHEN t2.access_type='出库' THEN  3  WHEN t2.access_type='入库'  THEN 2 ELSE 0 END) AS current
+FROM
+	bishe.items AS t1 LEFT JOIN
+	( SELECT *	FROM ( SELECT * FROM bishe.statistics ORDER BY date DESC ) AS t GROUP BY t.items_id ) AS t2 
+	ON  t1.items_id=t2.items_id
+ORDER BY
+	t1.add_date DESC
+	`
+	return mysqlPack.Select(db, q)
 }
 
 //查询货物的记录count，用来判断是入库还是出库，如果是奇数就是出库，如果是偶数那么就是入库
@@ -50,6 +83,7 @@ WHERE
 	`
 	return mysqlPack.SelectMap(db, q, itemId)
 }
+
 //查询货物的记录count，用来判断是入库还是出库，如果是奇数就是出库，如果是偶数那么就是入库
 func FindCountByItmeId(itemId string) map[string]string {
 	db := mysql.GetDB()
@@ -63,16 +97,17 @@ WHERE
 	`
 	return mysqlPack.SelectMap(db, q, itemId)
 }
-func AddRecords(userId, itemsId, user_name, access_type string)(int64, error) {
-	 db:=mysql.GetDB()
-	 q:=` INSERT INTO	 
+func AddRecords(userId, itemsId, user_name, access_type string) (int64, error) {
+	db := mysql.GetDB()
+	q := ` INSERT INTO	 
 	 bishe.statistics
  (user_id,items_id,user_name,access_type,date)  
  VALUES
  (?,?,?,?,?) `
-	return mysqlPack.Insert(db, q, userId,itemsId,user_name,access_type,utils.GetFormatTime())
+	return mysqlPack.Insert(db, q, userId, itemsId, user_name, access_type, utils.GetFormatTime())
 
 }
+
 //统计仓库的出入情况
 func FindAllCount(startDate, endDate, access_type, user_name string) []interface{} {
 	params := []interface{}{}
@@ -100,13 +135,14 @@ WHERE
 	}
 	if user_name != "" {
 		q += ` AND
-		a.user_name =? `
-		params = append(params, user_name)
+		a.user_name LIKE ? `
+		params = append(params, "%"+user_name+"%")
 
 	}
 	if startDate != "" && endDate != "" {
 		q += ` AND
-		a.date BETWEEN ?  AND ? `
+		a.date BETWEEN ?  AND date_add(?,interval 1 day) `
+		// date_add('2015-11-03',interval 1 day)
 		params = append(params, startDate)
 		params = append(params, endDate)
 	}
@@ -115,7 +151,7 @@ WHERE
 }
 
 //统计单个商品的情况
-func FindOneDetails(itemId,date string) map[string]string {
+func FindOneDetails(itemId, date string) map[string]string {
 	db := mysql.GetDB()
 	q := `
 	SELECT
@@ -135,88 +171,7 @@ WHERE
 AND  a.items_id = ?
 AND  a.date=?
 	`
-	return mysqlPack.SelectMap(db, q, itemId,date)
-}
-//统计仓库的出入情况导出表格
-func (_a *Appointment) FindAllByClinicId(startDate, endDate string, page, rows int) []interface{} {
-	return []interface{}{}
-	db := mysql.GetDB()
-	currentDate := utils.GetFormatTime()
-	w := ""
-	params := []interface{}{
-		_a.DoctorType,
-	}
-	if _a.ClinicId != "" {
-		w += " AND a.clinicId= ? "
-		params = append(params, _a.ClinicId)
-	}
-	if _a.DoctorName != "" {
-		w += " AND d.doctorName LIKE ? "
-		params = append(params, "%"+_a.DoctorName+"%")
-	}
-	if _a.Status != "" {
-		w += " AND a.status= ? "
-		params = append(params, _a.Status)
-	}
-	if _a.AppointmentTime != "" {
-		w += " AND a.appointmentTime LIKE ? "
-		params = append(params, "%"+_a.AppointmentTime+"%")
-	} else {
-		w += " AND a.appointmentTime < ? "
-		params = append(params, currentDate)
-	}
-	if startDate != "" && endDate != "" {
-		w += " AND a.appointmentTime >= ? AND a.appointmentTime <= ? "
-		params = append(params, startDate, endDate+" 23:59")
-	}
-	if _a.PatientName != "" {
-		w += " AND a.patientName LIKE ? "
-		params = append(params, "%"+_a.PatientName+"%")
-	}
-	limit := ""
-	if page > 0 && rows > 0 {
-		limit = " LIMIT ?,?"
-		params = append(params, strconv.Itoa((page-1)*rows), strconv.Itoa(rows))
-	}
-	q := `
-		SELECT 
-			a.clinicId,
-			a.doctorId,
-			a.appointmentId,
-			a.appointmentTime,
-			a.patientName,
-			a.patientTel,
-			FLOOR(a.patientAge/12) AS patientAge,
-			a.patientSex,
-			a.patientCond,
-			a.patientCondDesc,
-			a.price,
-			a.payType,
-			a.userId,
-			a.orderId,
-			a.status,
-			a.ecologyId,
-			a.addTime,
-			a.addRegTime,
-			a.doctorNameReg,
-			a.a_order,
-			a.is_up_time,
-			a.up_time,
-			a.up_apomt_time,
-			a.up_doctor_id,
-			a.up_apomt_price,
-			d.doctorName  
-		FROM 
-			appointment a
-		LEFT JOIN
-			doctor d 
-		ON
-			a.clinicId = d.clinicId
-		WHERE  a.doctorType=?
-		` + w + `
-		AND a.doctorId = d.doctorId
-		ORDER BY a.appointmentTime DESC ` + limit
-	return mysqlPack.Select(db, q, params...)
+	return mysqlPack.SelectMap(db, q, itemId, date)
 }
 
 //统计仓库现有库存情况
@@ -253,4 +208,178 @@ WHERE
 			date ASC `
 
 	return mysqlPack.Select(db, q, params...)
+}
+
+func Deluser(userId string) (int64, error) {
+	db := mysql.GetDB()
+	q := ` DELETE FROM bishe.userinfo WHERE user_id= ?   `
+
+	return mysqlPack.Exec(db, q, userId)
+}
+
+//根据userid查询密码
+
+func CheckPwdById(userId, pwd string) []interface{} {
+	db := mysql.GetDB()
+	q := ` SELECT *FROM bishe.userinfo WHERE user_id= ? AND user_passwd = MD5(?)  `
+
+	return mysqlPack.Select(db, q, userId, pwd)
+}
+func UserUpd(account, userId, name, sex, phone string) (int64, error) {
+	db := mysql.GetDB()
+	q := ` UPDATE bishe.userinfo
+	SET user_account =?, user_name =?, sex =?, user_phone =?
+	WHERE
+		user_id =?  `
+
+	return mysqlPack.Exec(db, q, account, name, sex, phone, userId)
+}
+
+func StatisticalSelf(userId, vTable string) []interface{} {
+	db := mysql.GetDB()
+	q := `
+	SELECT
+	t2.stsDate AS date,
+	count(t1.items_id) AS num,
+	floor(rand()*100) AS size
+FROM
+	bishe.statistics t1
+	RIGHT JOIN ( ` + vTable + ` ) t2
+	ON t2.stsDate = LEFT(t1.date,10) 
+AND
+	t1.user_id = ?
+GROUP BY t2.stsDate
+ORDER BY
+	date ASC `
+
+	return mysqlPack.Select(db, q, userId)
+}
+
+//个人当天统计和仓库当天统计
+func TodayStatistical(userId, date string) map[string]string {
+	db := mysql.GetDB()
+	q := `
+	SELECT
+	t1.myTotal,
+	count(*) AS allTotal
+FROM
+	(
+		SELECT
+			count(*) AS myTotal
+		FROM
+			bishe.statistics
+		WHERE
+			date BETWEEN ?
+		AND date_add( ? ,interval 1 day)
+AND
+			user_id = ?
+	) AS t1,
+	bishe.statistics AS t2 WHERE
+			date BETWEEN ?
+			AND	date_add( ? ,interval 1 day) `
+
+	return mysqlPack.SelectMap(db, q, date, date, userId, date, date)
+}
+
+//个人当天统计和仓库当天统计
+func AllStatistical(userId string) map[string]string {
+	db := mysql.GetDB()
+	q := `
+	SELECT
+	t1.myTotal,
+	count(*) AS allTotal
+FROM
+	(
+		SELECT
+			count(*) AS myTotal
+		FROM
+			bishe.statistics
+		WHERE
+			user_id = ?
+	) AS t1,
+	bishe.statistics AS t2  `
+
+	return mysqlPack.SelectMap(db, q, userId)
+}
+
+//个人在团队中的排名
+func SelfSort(userId string) map[string]string {
+	db := mysql.GetDB()
+	q := `
+	SELECT z.sort FROM(
+		SELECT
+			(@i :=@i + 1) AS sort,
+			l.*
+		FROM
+			(
+				SELECT
+					COUNT(*) AS total,
+					user_name,
+					user_id
+				FROM
+					statistics
+				GROUP BY
+					user_id
+				ORDER BY
+					total DESC
+			) AS l,
+			(SELECT @i := 0) AS i 
+		) z
+		WHERE z.user_id= ?  `
+
+	return mysqlPack.SelectMap(db, q, userId)
+}
+
+//查询员工总数
+func PermsCount() map[string]string {
+	db := mysql.GetDB()
+	q := `
+	SELECT COUNT(*) AS permnum FROM userinfo  `
+
+	return mysqlPack.SelectMap(db, q)
+}
+
+//查询所有员工---
+func PermsInfo() []interface{} {
+	db := mysql.GetDB()
+	q := `
+	SELECT user_id,user_account,user_phone,user_name,add_date, CASE WHEN sex = '1'THEN '男'ELSE '女'END AS sex FROM userinfo 
+  `
+
+	return mysqlPack.Select(db, q)
+}
+func StatisticalAll(userId, vTable string) []interface{} {
+	db := mysql.GetDB()
+	q := `
+	SELECT
+	count(t1.items_id) AS num
+FROM
+	bishe.statistics t1
+	RIGHT JOIN ( ` + vTable + ` ) t2
+	ON t2.stsDate = LEFT(t1.date,10) 
+AND
+	t1.user_id = ?
+GROUP BY t2.stsDate
+ORDER BY
+stsdate ASC `
+
+	return mysqlPack.Select(db, q, userId)
+}
+
+func PermsSelfCountByWeek(thisMonday string) []interface{} {
+
+	db := mysql.GetDB()
+	q := `
+		SELECT
+		COUNT(user_id) AS value,
+		user_name  AS name
+		FROM
+			bishe.statistics
+		WHERE
+			LEFT (date, 10) BETWEEN DATE_SUB( ? ,interval 8 day)
+		AND DATE_SUB( ? ,interval 2 day)
+		GROUP BY
+			user_id  `
+
+	return mysqlPack.Select(db, q, thisMonday, thisMonday)
 }

@@ -20,6 +20,19 @@ func CheckUserAccount(account string) []interface{} {
 
 	return mysqlPack.Select(db, sql, account)
 }
+func CheckUserbindAccount(account, userId string) []interface{} {
+	db := mysql.GetDB()
+	sql := ` SELECT * FROM bishe.userinfo WHERE user_account = ? AND user_id != ? `
+
+	return mysqlPack.Select(db, sql, account, userId)
+}
+func CheckUserBindphone(phone, userId string) []interface{} {
+	db := mysql.GetDB()
+	sql := ` SELECT * FROM bishe.userinfo WHERE user_phone = ? AND user_id != ? `
+
+	return mysqlPack.Select(db, sql, phone, userId)
+}
+
 func CheckUserBind(phone, account string) []interface{} {
 	db := mysql.GetDB()
 	sql := ` SELECT * FROM bishe.userinfo WHERE user_phone = ?  `
@@ -53,10 +66,10 @@ func ApiChangepwd(phone string, newpwd string) int64 {
 }
 
 //注册
-func ApiRegist(phone, newpwd, account, name string) (int64, error) {
+func ApiRegist(phone, newpwd, account, name, sex string) (int64, error) {
 	db := mysql.GetDB()
-	date := u.GetFormatTime()
+	date := u.GetFormatDate()
 	user_id := u.GetUUID()
-	sql := ` INSERT INTO bishe.userinfo (user_phone, user_passwd, user_account, user_id,user_name,add_date)VALUES( ?, MD5(?), ?, ?, ? ,? ) `
-	return mysqlPack.Insert(db, sql, phone, newpwd, account, user_id, name, date)
+	sql := ` INSERT INTO bishe.userinfo (user_phone, user_passwd, user_account, user_id,user_name,sex,add_date)VALUES( ?, MD5(?), ?, ?, ? ,?, ? ) `
+	return mysqlPack.Insert(db, sql, phone, newpwd, account, user_id, name, sex, date)
 }

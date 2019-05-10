@@ -104,10 +104,10 @@ footer .tip .contact div{
     line-height: 40px;
 }
 
-.page_news .container_hd h2, .page_simple .container_hd h2, .page_news .main_hd h2, .page_simple .main_hd h2 {
+/* .page_news .container_hd h2, .page_simple .container_hd h2, .page_news .main_hd h2, .page_simple .main_hd h2 {
     line-height: 52px;
     background-color: #f4f5f9;
-}
+} */
 .container_hd h2, .main_hd h2 {
     font-size: 16px;
     padding: 0 30px;
@@ -161,9 +161,9 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, fieldset, textarea {
     padding-bottom: 25px;
 }
 
-.icon_msg_mini.info {
+/* .icon_msg_mini.info {
     background: url(/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z381ecd.png) 0 -876px no-repeat;
-}
+} */
 .mini_tips i {
     font-weight: 400;
     font-style: normal;
