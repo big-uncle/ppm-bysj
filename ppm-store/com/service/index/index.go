@@ -45,7 +45,6 @@ func FindOneDetails(itemId, date string) (interface{}, string, string) {
 // 根据条件查询货物出入库以excel形式导出
 func FindAllCountXlsx(startDate, endDate, access_type, user_name string) (path string) {
 
-	// title := []string{"货物编号", "患者电话", "患者年龄", "患者性别", "病情", "病情描述", "预约时间", "预约服务", "预约状态", "排号状态"}
 	title := []string{"货物编号", "货物名字", "操作人员姓名", "出入库类型", "货物种类", "货物描述", "出入库时间"}
 	column := []string{"items_id", "items_name", "user_name", "access_type", "items_type", "items_desc", "date"}
 	xlFile := xlsx.NewFile()
