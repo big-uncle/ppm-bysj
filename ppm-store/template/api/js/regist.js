@@ -1,6 +1,6 @@
 $(function () {
     //地址栏参数，回调地址
-    var redirect_uri = decodeURIComponent("/login");
+    var redirect_uri = decodeURIComponent("/api/login");
     // 账户名效验
     $('#js_account').bind('keyup blur', function () {
         if (!$('#js_account').val()) {
@@ -96,7 +96,7 @@ $(function () {
         // 页面没有错误提示
         if (oldStatus && newStatus && reStatus && accounStatus && nameStatus) {
             //提交
-            $.post("/api/regist", { phone: phone, newpwd: newpwd, account: account, name: name,sex: sex }, function (result) {
+            $.post("/api/register", { phone: phone, newpwd: newpwd, account: account, name: name,sex: sex }, function (result) {
                 if (typeof result == 'string') {
                     result = JSON.parse(result)
                 }

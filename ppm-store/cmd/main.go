@@ -5,8 +5,9 @@ import (
 	"net/http"
 	"path"
 
-	"./com/controllers/index"
-	"./com/controllers/login"
+	"ppm/ppm-store/com/controllers/index"
+	"ppm/ppm-store/com/controllers/login"
+
 	"github.com/gorilla/mux"
 )
 
@@ -19,26 +20,27 @@ func main() {
 	/**
 	 * 处理静态资源文件
 	 */
-	router.Handle("/css/{.+}", FileHandler{}).Methods("GET")
-	router.Handle("/imgs/{.+}", FileHandler{}).Methods("GET")
-	router.Handle("/js/{.+}", FileHandler{}).Methods("GET")
+	router.Handle("/api/css/{.+}", FileHandler{}).Methods("GET")
+	router.Handle("/api/imgs/{.+}", FileHandler{}).Methods("GET")
+	router.Handle("/api/js/{.+}", FileHandler{}).Methods("GET")
 	//----------------------------------登录页面---------------------------------
 	//跳转登录界面
-	router.HandleFunc("/", login.Login)
-	router.HandleFunc("/login", login.Login)
-	router.HandleFunc("/play", login.Play)
+	//不是/api,全部跳到nginx全部跳转到前端
+	// router.HandleFunc("/", login.Login)
+	router.HandleFunc("/api/login", login.Login)
+	router.HandleFunc("/api/play", login.Play)
 	//跳转密码修改页面
-	router.HandleFunc("/changepwd", login.Changepwd)
+	router.HandleFunc("/api/changepwd", login.Changepwd)
 	//跳转注册页面
-	router.HandleFunc("/regist", login.Regist)
-	router.HandleFunc("/index", login.Index)
+	router.HandleFunc("/api/regist", login.Regist)
+	router.HandleFunc("/api/index", login.Index)
 	//--------注册api----------
 	//登录认证
 	router.HandleFunc("/api/authentication", login.ApiAuthentication)
 	//注册
-	router.HandleFunc("/api/regist", login.ApiRegist)
+	router.HandleFunc("/api/register", login.ApiRegist)
 	//修改密码
-	router.HandleFunc("/api/changepwd", login.ApiChangepwd)
+	router.HandleFunc("/api/changepasswd", login.ApiChangepwd)
 
 	//-------------------------------------前后端分离接口----------------------------------------------
 	//添加货物出入仓记录
@@ -78,6 +80,7 @@ func main() {
 
 	// router.HandleFunc("/api/xlsx/",)
 	log.Println("服务器已启动，端口号10800")
+	log.Println("提示程序运行空间必须与template同级目录")
 	log.Fatal(http.ListenAndServe(":10800", &MyServer{router}))
 
 }
@@ -89,7 +92,9 @@ type FileHandler struct {
 }
 
 func (f FileHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	log.Println("执行")
 	prefix := "template"
+
 	http.ServeFile(w, r, path.Join(prefix, r.URL.Path))
 }
 

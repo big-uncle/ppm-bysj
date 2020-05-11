@@ -1,7 +1,7 @@
 var redirect_uri;
 $(function () {
     //地址栏参数，回调地址
-    redirect_uri = decodeURIComponent("http://127.0.0.1:10888");
+    redirect_uri = decodeURIComponent("http://bysj.store.pp");
     document.onkeydown = function (e) {
         var ev = document.all ? window.event : e;
         if (ev.keyCode == 13) {
@@ -12,10 +12,10 @@ $(function () {
         location.href = 'https://baike.baidu.com/item/%E6%99%BA%E8%83%BD%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F';
     })
     $('.forget').bind('click', function () {
-        location.href = decodeURIComponent("/changepwd");
+        location.href = decodeURIComponent("changepwd");
     })
     $('.regist').bind('click', function () {
-        location.href = decodeURIComponent("/regist");
+        location.href = decodeURIComponent("regist");
     })
     //登录
     $('#login').bind('click', function () {

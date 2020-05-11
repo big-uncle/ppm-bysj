@@ -30,7 +30,7 @@ class RegistrationForm extends React.Component {
           message.error('请仔细阅读并同意勾选下方服务协议框!')
         }else{
         setTimeout(() => {
-          fetch(conf.apiurl() + '/api/regist', {
+          fetch(conf.apiurl() + '/api/register', {
             method: 'POST',
             mode: "cors",//处理跨域
             headers: {

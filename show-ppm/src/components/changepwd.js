@@ -30,7 +30,7 @@ import {
         if (!err) {
           // console.log('接受到的表单值: ', values);
           setTimeout(() => {
-            fetch(conf.apiurl() + '/api/changepwd', {
+            fetch(conf.apiurl() + '/api/changepasswd', {
               method: 'POST',
               mode: "cors",//处理跨域
               headers: {

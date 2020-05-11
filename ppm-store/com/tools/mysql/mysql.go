@@ -1,8 +1,9 @@
 package mysql
 
 import (
-	conf "../conf"
 	"database/sql"
+	"ppm/ppm-store/com/tools/conf"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 

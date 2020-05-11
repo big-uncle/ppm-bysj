@@ -5,13 +5,13 @@ import (
 	"log"
 	"net/http"
 
-	"../../service/login"
-	"../../tools/utils"
+	"ppm/ppm-store/com/service/login"
+	"ppm/ppm-store/com/tools/utils"
 )
 
 //玩游戏
 func Play(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("template/html/play.html")
+	t, err := template.ParseFiles("template/api/html/play.html")
 	if err != nil {
 		log.Println(err)
 	}
@@ -23,7 +23,7 @@ func Play(w http.ResponseWriter, r *http.Request) {
  */
 func Login(w http.ResponseWriter, r *http.Request) {
 
-	t, err := template.ParseFiles("template/html/login.html")
+	t, err := template.ParseFiles("template/api/html/login.html")
 	if err != nil {
 		log.Println(err)
 	}
@@ -35,7 +35,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
  */
 func Changepwd(w http.ResponseWriter, r *http.Request) {
 
-	t, err := template.ParseFiles("template/html/changepwd.html")
+	t, err := template.ParseFiles("template/api/html/changepwd.html")
 	if err != nil {
 		log.Println(err)
 	}
@@ -47,7 +47,7 @@ func Changepwd(w http.ResponseWriter, r *http.Request) {
  */
 func Regist(w http.ResponseWriter, r *http.Request) {
 
-	t, err := template.ParseFiles("template/html/regist.html")
+	t, err := template.ParseFiles("template/api/html/regist.html")
 	if err != nil {
 		log.Println(err)
 	}
@@ -106,7 +106,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	//格式化参数
 	r.ParseForm()
 	log.Println("我走index")
-	t, err := template.ParseFiles("template/html/index.html")
+	t, err := template.ParseFiles("template/api/html/index.html")
 	if err != nil {
 		log.Println(err)
 	}

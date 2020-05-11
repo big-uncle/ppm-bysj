@@ -17,7 +17,7 @@ npm-debug.log*
 * .dll
 * .so
 * .dylib
-
+node_modules
 ＃测试二进制文件，使用`go test -c`构建
 * .test
 

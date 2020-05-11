@@ -8,10 +8,10 @@ import (
 	"os"
 	"strconv"
 
-	modindex "../../models/index"
-	serindex "../../service/index"
-	"../../tools/conf"
-	"../../tools/utils"
+	modindex "ppm/ppm-store/com/models/index"
+	serindex "ppm/ppm-store/com/service/index"
+	"ppm/ppm-store/com/tools/conf"
+	"ppm/ppm-store/com/tools/utils"
 )
 
 //统计货物的所有出入库情况
@@ -172,7 +172,7 @@ func AddItemPic(w http.ResponseWriter, r *http.Request) {
 	// }
 	// defer file.Close()
 	// // // // picName := utils.GetUUID()
-	// // // // _name := "./" + picName + ".jpg"
+	// // // // _name := "ppm/ppm-store/" + picName + ".jpg"
 	// // // // ImagePath := _name
 
 	// io.Copy(f3, file)
@@ -182,7 +182,7 @@ func AddItemPic(w http.ResponseWriter, r *http.Request) {
 
 	// _body, _ := ioutil.ReadAll(r.Body)
 
-	// ioutil.WriteFile("./重复111122222.jpg", _body, 0644)
+	// ioutil.WriteFile("ppm/ppm-store/重复111122222.jpg", _body, 0644)
 	// r.ParseForm()
 	// log.Println("3333333333", r.Body)
 	// log.Println("88888888888", r.PostForm)
@@ -232,7 +232,7 @@ func AddItemPic(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// fmt.Fprintf(w, "ok") //这个也相当于传送一个响应回去
-	fmt.Fprintf(w, "./imgs/"+handler.Filename)
+	fmt.Fprintf(w, "imgs/"+handler.Filename)
 	// utils.ResponseWriter("", "图片信息", "200", w)
 }
 

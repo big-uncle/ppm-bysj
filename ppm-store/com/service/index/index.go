@@ -5,10 +5,11 @@ import (
 	"log"
 	"time"
 
-	modindex "../../models/index"
-	"../../models/login"
-	"../../tools/conf"
-	"../../tools/utils"
+	modindex "ppm/ppm-store/com/models/index"
+	"ppm/ppm-store/com/models/login"
+	"ppm/ppm-store/com/tools/conf"
+	"ppm/ppm-store/com/tools/utils"
+
 	"github.com/tealeg/xlsx"
 )
 
@@ -108,8 +109,8 @@ func FindAllCountXlsx(startDate, endDate, access_type, user_name string) (path s
 	sheet.SetColWidth(5, 5, 100)
 	sheet.SetColWidth(6, 6, 20)
 	//自己笔记本的路径
-	// if err := xlFile.Save("C:/Users/A-杰/Desktop/ppm-bysj/ppm-store/xlsx/file1.xlsx"); err == nil { //这个只是保存到本地，
-	// 	path = "C:/Users/A-杰/Desktop/ppm-bysj/ppm-store/xlsx/file1.xlsx" //这个是将本地的上传到http里面，供别人下载
+	// if err := xlFile.Save("C:/Users/A-杰/Desktop/ppm/ppm-store-bysj/ppm/ppm-store-store/xlsx/file1.xlsx"); err == nil { //这个只是保存到本地，
+	// 	path = "C:/Users/A-杰/Desktop/ppm/ppm-store-bysj/ppm/ppm-store-store/xlsx/file1.xlsx" //这个是将本地的上传到http里面，供别人下载
 	// 	log.Println("保存excel表格报错了")
 	// }
 	//公司电脑的路径

@@ -17,7 +17,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mozillazg/go-pinyin"
 	"github.com/snluu/uuid"
 )
 
@@ -598,17 +597,17 @@ func GetFront_Date(timestamp int64, i int64) (results []interface{}) {
 }
 
 //汉语转拼音缩写 首字母大写
-func ChinesePinyin(chinese string) string {
-	var _pinyin string
-	_fun := pinyin.NewArgs()
-	pinyinlist := pinyin.Pinyin(chinese, _fun)
-	for _, value := range pinyinlist {
-		for _, _value := range value {
-			_pinyin += strings.ToUpper(_value)[0:1]
-		}
-	}
-	return _pinyin
-}
+// func ChinesePinyin(chinese string) string {
+// 	var _pinyin string
+// 	_fun := pinyin.NewArgs()
+// 	pinyinlist := pinyin.Pinyin(chinese, _fun)
+// 	for _, value := range pinyinlist {
+// 		for _, _value := range value {
+// 			_pinyin += strings.ToUpper(_value)[0:1]
+// 		}
+// 	}
+// 	return _pinyin
+// }
 
 /**
  * 生成北京时区格式的时间字符串

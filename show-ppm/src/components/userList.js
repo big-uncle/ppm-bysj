@@ -44,7 +44,7 @@ class UserList extends React.Component {
   }
   confirm1 = (a,e) => {
     console.log(e.user_id)
-    if (localStorage.getItem('phone')=='135****7817'){
+    if (localStorage.getItem('account')=='root'||localStorage.getItem('account')=='admin'){
     fetch(conf.apiurl() + '/api/data/deluser?userId='+e.user_id, {}).then(res => {//加载页面的函数
       res.json().then(obj => {
         console.log(obj)

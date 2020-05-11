@@ -1,12 +1,9 @@
 package index
 
 import (
-	"../../tools/mysql"
-	"../../tools/utils"
-
-	// "log"
-	"mryl.tools/mysqlPack"
-	// "strconv"
+	"ppm/ppm-store/com/tools/mysql"
+	"ppm/ppm-store/com/tools/mysql/mysqlPack"
+	"ppm/ppm-store/com/tools/utils"
 )
 
 type Item struct {
@@ -20,7 +17,7 @@ type Item struct {
 func (i *Item) AddItemInfo() (int64, error) {
 	db := mysql.GetDB()
 	q := `
-	INSERT INTO bishe.items (
+	INSERT INTO ppm.items (
 		items_id,
 		items_name,
 		items_desc,
@@ -36,7 +33,7 @@ func (i *Item) AddItemInfo() (int64, error) {
 func (i *Item) UpdItemInfo() (int64, error) {
 	db := mysql.GetDB()
 	q := `
-	UPDATE bishe.items SET items_name= ?, items_desc = ?, items_pic = ?,items_type = ? WHERE items_id = ? 
+	UPDATE ppm.items SET items_name= ?, items_desc = ?, items_pic = ?,items_type = ? WHERE items_id = ? 
 	`
 	return mysqlPack.Exec(db, q, i.ItemName, i.ItemDesc, i.ItemPic, i.ItemType, i.ItemId)
 }
@@ -44,25 +41,26 @@ func (i *Item) UpdItemInfo() (int64, error) {
 func DelItemInfo(itemId string) (int64, error) {
 	db := mysql.GetDB()
 	q := `
-	DELETE FROM bishe.items WHERE items_id = ?
+	DELETE FROM ppm.items WHERE items_id = ?
 	`
 	return mysqlPack.Exec(db, q, itemId)
 }
 func FindItemInfo(itemId string) map[string]string {
 	db := mysql.GetDB()
 	q := `
-	SELECT * FROM bishe.items WHERE items_id = ?
+	SELECT * FROM ppm.items WHERE items_id = ?
 	`
 	return mysqlPack.SelectMap(db, q, itemId)
 }
+
 func FindAllItemInfo() []interface{} {
 	db := mysql.GetDB()
 	q := `
 	SELECT
 	t1.*,(case WHEN t2.access_type='出库' THEN  3  WHEN t2.access_type='入库'  THEN 2 ELSE 0 END) AS current
 FROM
-	bishe.items AS t1 LEFT JOIN
-	( SELECT *	FROM ( SELECT * FROM bishe.statistics ORDER BY date DESC ) AS t GROUP BY t.items_id ) AS t2 
+	ppm.items AS t1 LEFT JOIN
+	( SELECT *	FROM ( SELECT * FROM ppm.statistics ORDER BY date DESC ) AS t GROUP BY t.items_id ) AS t2
 	ON  t1.items_id=t2.items_id
 ORDER BY
 	t1.add_date DESC
@@ -77,7 +75,7 @@ func FindItme(itemId string) map[string]string {
 	SELECT
 	count(*) AS count
 FROM
-	bishe.items
+	ppm.items
 WHERE
 	items_id = ?
 	`
@@ -91,7 +89,7 @@ func FindCountByItmeId(itemId string) map[string]string {
 	SELECT
 	count(*) AS count
 FROM
-	bishe.statistics
+	ppm.statistics
 WHERE
 	items_id = ?
 	`
@@ -100,7 +98,7 @@ WHERE
 func AddRecords(userId, itemsId, user_name, access_type string) (int64, error) {
 	db := mysql.GetDB()
 	q := ` INSERT INTO	 
-	 bishe.statistics
+	 ppm.statistics
  (user_id,items_id,user_name,access_type,date)  
  VALUES
  (?,?,?,?,?) `
@@ -123,8 +121,8 @@ func FindAllCount(startDate, endDate, access_type, user_name string) []interface
 	b.items_pic,
 	b.items_type
 FROM
-	bishe.statistics AS a,
-	bishe.items AS b
+	ppm.statistics AS a,
+	ppm.items AS b
 WHERE
 	a.items_id = b.items_id
 	`
@@ -164,8 +162,8 @@ func FindOneDetails(itemId, date string) map[string]string {
 	b.items_pic,
 	b.items_type
 FROM
-	bishe.statistics AS a,
-	bishe.items AS b
+	ppm.statistics AS a,
+	ppm.items AS b
 WHERE
 	a.items_id = b.items_id
 AND  a.items_id = ?
@@ -186,7 +184,7 @@ func FindInventory(startDate, endDate, user_name string) []interface{} {
 	user_name,
 	date
 FROM
-	bishe.statistics
+	ppm.statistics
 WHERE
 	1 = 1 `
 	if user_name != "" {
@@ -212,7 +210,7 @@ WHERE
 
 func Deluser(userId string) (int64, error) {
 	db := mysql.GetDB()
-	q := ` DELETE FROM bishe.userinfo WHERE user_id= ?   `
+	q := ` DELETE FROM ppm.userinfo WHERE user_id= ?   `
 
 	return mysqlPack.Exec(db, q, userId)
 }
@@ -221,13 +219,13 @@ func Deluser(userId string) (int64, error) {
 
 func CheckPwdById(userId, pwd string) []interface{} {
 	db := mysql.GetDB()
-	q := ` SELECT *FROM bishe.userinfo WHERE user_id= ? AND user_passwd = MD5(?)  `
+	q := ` SELECT *FROM ppm.userinfo WHERE user_id= ? AND user_passwd = MD5(?)  `
 
 	return mysqlPack.Select(db, q, userId, pwd)
 }
 func UserUpd(account, userId, name, sex, phone string) (int64, error) {
 	db := mysql.GetDB()
-	q := ` UPDATE bishe.userinfo
+	q := ` UPDATE ppm.userinfo
 	SET user_account =?, user_name =?, sex =?, user_phone =?
 	WHERE
 		user_id =?  `
@@ -243,7 +241,7 @@ func StatisticalSelf(userId, vTable string) []interface{} {
 	count(t1.items_id) AS num,
 	floor(rand()*100) AS size
 FROM
-	bishe.statistics t1
+	ppm.statistics t1
 	RIGHT JOIN ( ` + vTable + ` ) t2
 	ON t2.stsDate = LEFT(t1.date,10) 
 AND
@@ -267,14 +265,14 @@ FROM
 		SELECT
 			count(*) AS myTotal
 		FROM
-			bishe.statistics
+			ppm.statistics
 		WHERE
 			date BETWEEN ?
 		AND date_add( ? ,interval 1 day)
 AND
 			user_id = ?
 	) AS t1,
-	bishe.statistics AS t2 WHERE
+	ppm.statistics AS t2 WHERE
 			date BETWEEN ?
 			AND	date_add( ? ,interval 1 day) `
 
@@ -293,11 +291,11 @@ FROM
 		SELECT
 			count(*) AS myTotal
 		FROM
-			bishe.statistics
+			ppm.statistics
 		WHERE
 			user_id = ?
 	) AS t1,
-	bishe.statistics AS t2  `
+	ppm.statistics AS t2  `
 
 	return mysqlPack.SelectMap(db, q, userId)
 }
@@ -354,7 +352,7 @@ func StatisticalAll(userId, vTable string) []interface{} {
 	SELECT
 	count(t1.items_id) AS num
 FROM
-	bishe.statistics t1
+	ppm.statistics t1
 	RIGHT JOIN ( ` + vTable + ` ) t2
 	ON t2.stsDate = LEFT(t1.date,10) 
 AND
@@ -374,7 +372,7 @@ func PermsSelfCountByWeek(thisMonday string) []interface{} {
 		COUNT(user_id) AS value,
 		user_name  AS name
 		FROM
-			bishe.statistics
+			ppm.statistics
 		WHERE
 			LEFT (date, 10) BETWEEN DATE_SUB( ? ,interval 8 day)
 		AND DATE_SUB( ? ,interval 2 day)
